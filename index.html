@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthCompanion - UX/UI Case Study</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --primary: #2563EB;
+            --primary-light: #DBEAFE;
+            --primary-dark: #1E40AF;
+            --accent: #0D9488;
+            --accent-light: #CCFBF1;
+            --surface: #FFFFFF;
+            --bg: #F8FAFC;
+            --text: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #94A3B8;
+            --border: #E2E8F0;
+            --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.05);
+            --radius: 16px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 17px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 0 2rem;
+        }
+
+        nav .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        nav .logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 0.25rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        nav .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.4rem 0.75rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        nav .nav-links a:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 10rem 2rem 6rem;
+            text-align: center;
+            background: linear-gradient(135deg, #EFF6FF 0%, #F0FDFA 50%, #F8FAFC 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -25%;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle at 30% 50%, rgba(37,99,235,0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 50%, rgba(13,148,136,0.05) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .hero > * { position: relative; z-index: 1; }
+
+        .hero .badge {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.5rem 1.25rem;
+            border-radius: 100px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .hero-meta .meta-item {
+            text-align: center;
+        }
+
+        .hero-meta .meta-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .hero-meta .meta-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-top: 0.25rem;
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .section-wide {
+            max-width: 1100px;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--primary);
+            background: var(--primary-light);
+            padding: 0.35rem 1rem;
+            border-radius: 100px;
+            margin-bottom: 1rem;
+        }
+
+        .section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .section .section-intro {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            line-height: 1.8;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+            transition: box-shadow 0.3s;
+        }
+
+        .card:hover { box-shadow: var(--shadow-md); }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .card p, .card li {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .card ul, .card ol {
+            padding-left: 1.25rem;
+            margin-top: 0.5rem;
+        }
+
+        .card li {
+            margin-bottom: 0.4rem;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Images */
+        .img-showcase {
+            margin: 2.5rem 0;
+        }
+
+        .img-showcase img {
+            width: 100%;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+        }
+
+        .img-showcase .caption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.75rem;
+            font-style: italic;
+        }
+
+        .img-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+
+        .img-grid .img-item img {
+            width: 100%;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+        }
+
+        .img-grid .img-item .caption {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        /* Divider */
+        .divider {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .divider hr {
+            border: none;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* Stat Cards */
+        .stat-card {
+            text-align: center;
+            padding: 1.75rem;
+        }
+
+        .stat-card .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-light));
+            border-radius: var(--radius);
+            padding: 2rem 2.5rem;
+            margin: 2rem 0;
+            border-left: 4px solid var(--primary);
+        }
+
+        .highlight-box p {
+            font-size: 1.05rem;
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        .highlight-box strong {
+            color: var(--primary-dark);
+        }
+
+        /* Quote */
+        blockquote {
+            border-left: 4px solid var(--primary);
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+            background: var(--primary-light);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* Table */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        thead {
+            background: var(--primary);
+            color: white;
+        }
+
+        th {
+            padding: 0.85rem 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        td {
+            padding: 0.85rem 1.25rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        tbody tr:hover { background: #F1F5F9; }
+
+        /* Tag */
+        .tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+            margin: 0.15rem;
+        }
+
+        .tag-blue { background: var(--primary-light); color: var(--primary); }
+        .tag-green { background: var(--accent-light); color: var(--accent); }
+        .tag-orange { background: #FFF7ED; color: #C2410C; }
+        .tag-purple { background: #F3E8FF; color: #7C3AED; }
+
+        /* Persona Card */
+        .persona-section {
+            margin: 2rem 0;
+        }
+
+        .persona-card-visual {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+
+        .persona-card-visual img {
+            width: 100%;
+            display: block;
+        }
+
+        /* Color palette */
+        .color-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+
+        .color-swatch {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: white;
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .color-swatch .swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .color-swatch .color-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .color-swatch .color-hex {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-family: monospace;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--text);
+            color: #CBD5E1;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #93C5FD;
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav .nav-links { display: none; }
+            .hero { padding: 8rem 1.5rem 4rem; }
+            .section { padding: 3rem 1.5rem; }
+            .hero-meta { gap: 1.5rem; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Process Steps */
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .process-step {
+            display: flex;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .process-step .step-marker {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .process-step .step-number {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            z-index: 1;
+        }
+
+        .process-step .step-line {
+            width: 2px;
+            flex: 1;
+            background: var(--border);
+            min-height: 40px;
+        }
+
+        .process-step:last-child .step-line { display: none; }
+
+        .process-step .step-content {
+            padding-bottom: 2rem;
+        }
+
+        .process-step .step-content h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            padding-top: 0.5rem;
+        }
+
+        .process-step .step-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="nav-inner">
+        <a href="#" class="logo">HealthCompanion</a>
+        <ul class="nav-links">
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#research">Research</a></li>
+            <li><a href="#personas">Personas</a></li>
+            <li><a href="#journey">Journey</a></li>
+            <li><a href="#wireframes">Wireframes</a></li>
+            <li><a href="#hifi">Mockups</a></li>
+            <li><a href="#testing">Testing</a></li>
+            <li><a href="#reflection">Reflection</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+    <span class="badge">UX/UI Case Study</span>
+    <h1>Designing a <span>Health Companion</span> Super App</h1>
+    <p>A user-centered approach to helping individuals with chronic health conditions manage medications, appointments, and communication with healthcare professionals.</p>
+    <div class="hero-meta">
+        <div class="meta-item">
+            <div class="meta-label">Role</div>
+            <div class="meta-value">UX/UI Designer</div>
+        </div>
+        <div class="meta-item">
+            <div class="meta-label">Duration</div>
+            <div class="meta-value">4 Weeks</div>
+        </div>
+        <div class="meta-item">
+            <div class="meta-label">Tools</div>
+            <div class="meta-value">Figma, Miro, Maze</div>
+        </div>
+        <div class="meta-item">
+            <div class="meta-label">Platform</div>
+            <div class="meta-value">iOS &amp; Android</div>
+        </div>
+    </div>
+</section>
+
+<!-- Overview -->
+<section id="overview" class="section fade-in">
+    <span class="section-label">01 &mdash; Overview</span>
+    <h2>The Problem</h2>
+    <p class="section-intro">
+        Millions of people living with chronic conditions struggle to manage complex medication regimens and coordinate care across multiple healthcare providers. Existing solutions are fragmented, clinical-feeling, and fail to account for the emotional and cognitive load these patients carry daily.
+    </p>
+
+    <div class="img-showcase">
+        <img src="images/design-process.png" alt="Design Process Overview">
+        <div class="caption">Our design thinking process: Empathize, Define, Ideate, Prototype, Test</div>
+    </div>
+
+    <div class="highlight-box">
+        <p><strong>Design Challenge:</strong> How might we create a mobile health management experience that feels supportive rather than clinical, reduces cognitive load for users managing multiple medications, and seamlessly connects patients with their healthcare providers?</p>
+    </div>
+
+    <div class="grid-3" style="margin-top: 2rem;">
+        <div class="card stat-card">
+            <div class="stat-number">50%</div>
+            <div class="stat-label">of patients with chronic conditions don't take medications as prescribed</div>
+        </div>
+        <div class="card stat-card">
+            <div class="stat-number">67%</div>
+            <div class="stat-label">of users abandon health apps within the first two weeks</div>
+        </div>
+        <div class="card stat-card">
+            <div class="stat-number">3.2</div>
+            <div class="stat-label">average number of specialists seen by patients with chronic conditions</div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- Research -->
+<section id="research" class="section fade-in">
+    <span class="section-label">02 &mdash; User Research</span>
+    <h2>Understanding Our Users</h2>
+    <p class="section-intro">
+        To design a truly user-centered solution, I employed a multi-method research approach combining qualitative and quantitative techniques to build a deep understanding of our target users' needs, behaviors, and pain points.
+    </p>
+
+    <h3 style="margin-bottom: 1rem; font-size: 1.3rem;">Research Methods</h3>
+
+    <div class="grid-2">
+        <div class="card">
+            <h3>Semi-Structured Interviews</h3>
+            <p>Conducted <strong>12 in-depth interviews</strong> (45-60 minutes each) with individuals managing chronic conditions including diabetes, hypertension, and asthma. Key topics explored:</p>
+            <ul>
+                <li>Daily medication management routines and challenges</li>
+                <li>Experience with existing health apps and tools</li>
+                <li>Communication patterns with healthcare providers</li>
+                <li>Emotional impact of managing chronic conditions</li>
+                <li>Technology comfort level and preferences</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Online Survey</h3>
+            <p>Distributed a survey to <strong>150 respondents</strong> via online health communities and patient advocacy groups. The survey gathered quantitative data on:</p>
+            <ul>
+                <li>Medication adherence rates and common barriers</li>
+                <li>Feature preferences for a health management app</li>
+                <li>Current tools used (paper, apps, pill organizers)</li>
+                <li>Frequency of missed doses and consequences</li>
+                <li>Willingness to share health data digitally</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Competitive Analysis</h3>
+            <p>Analyzed <strong>8 existing health management apps</strong> (Medisafe, MyTherapy, CareZone, Healthily, etc.) to identify strengths, weaknesses, and market gaps:</p>
+            <ul>
+                <li>Most apps focus on medication tracking only</li>
+                <li>Poor integration between medication and appointment features</li>
+                <li>Limited or no direct doctor communication</li>
+                <li>Clinical, sterile visual design that feels impersonal</li>
+                <li>Overly complex onboarding processes</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Secondary Research</h3>
+            <p>Reviewed academic literature and industry reports on medication adherence, mHealth adoption, and UX design for older adults:</p>
+            <ul>
+                <li>WHO reports on medication adherence in chronic disease</li>
+                <li>Nielsen Norman Group research on senior-friendly design</li>
+                <li>Studies on push notification fatigue in health apps</li>
+                <li>HIPAA and health data privacy best practices</li>
+                <li>Accessibility standards (WCAG 2.1 AA) for health apps</li>
+            </ul>
+        </div>
+    </div>
+
+    <h3 style="margin: 2.5rem 0 1rem; font-size: 1.3rem;">Key Research Findings</h3>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Finding</th>
+                    <th>Impact</th>
+                    <th>Design Implication</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>78% of users forget medications due to busy schedules</strong></td>
+                    <td><span class="tag tag-orange">High</span></td>
+                    <td>Smart reminders that adapt to user routines, not just fixed times</td>
+                </tr>
+                <tr>
+                    <td><strong>Users feel overwhelmed by multiple apps for different needs</strong></td>
+                    <td><span class="tag tag-orange">High</span></td>
+                    <td>All-in-one solution: medications, appointments, and messaging in one app</td>
+                </tr>
+                <tr>
+                    <td><strong>65% want to communicate with doctors between visits</strong></td>
+                    <td><span class="tag tag-orange">High</span></td>
+                    <td>Built-in secure messaging with healthcare providers</td>
+                </tr>
+                <tr>
+                    <td><strong>Older users struggle with small text and complex navigation</strong></td>
+                    <td><span class="tag tag-blue">Medium</span></td>
+                    <td>Large touch targets, clear typography, simple navigation hierarchy</td>
+                </tr>
+                <tr>
+                    <td><strong>Caregivers manage medications for family members</strong></td>
+                    <td><span class="tag tag-blue">Medium</span></td>
+                    <td>Multi-profile support for caregivers managing multiple patients</td>
+                </tr>
+                <tr>
+                    <td><strong>Users want acknowledgment of their efforts</strong></td>
+                    <td><span class="tag tag-green">Medium</span></td>
+                    <td>Adherence streaks, progress visualization, positive reinforcement</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <blockquote>
+        "I take 6 pills a day at different times. I've tried using my phone's alarm, but I end up ignoring them because there are too many. I just need something simple that understands my routine." &mdash; Interview Participant, age 58
+    </blockquote>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- Personas -->
+<section id="personas" class="section section-wide fade-in">
+    <span class="section-label">03 &mdash; User Personas</span>
+    <h2>Who Are We Designing For?</h2>
+    <p class="section-intro">
+        Based on the research findings, I developed three detailed personas representing the core user segments of the HealthCompanion app. These personas guided every design decision throughout the project.
+    </p>
+
+    <div class="persona-section">
+        <h3 style="margin-bottom: 1rem;">Primary Persona: The Independent Senior</h3>
+        <div class="persona-card-visual">
+            <img src="images/persona-sarah.png" alt="User Persona - Sarah Chen">
+        </div>
+        <div class="card">
+            <h3>Sarah Chen &mdash; Retired Teacher, Age 62</h3>
+            <p><strong>Scenario:</strong> Sarah was diagnosed with Type 2 diabetes and hypertension 5 years ago. She takes 4 daily medications and sees 3 specialists regularly. She lives alone in a suburban area and uses her smartphone primarily for calls, photos, and basic apps. She frequently forgets her afternoon medication because she gets absorbed in her gardening and book club activities.</p>
+            <p style="margin-top: 1rem;"><strong>How she would use the app:</strong> Sarah would rely heavily on medication reminders timed to her daily routine (breakfast, lunch, dinner), use the appointment scheduler to keep track of her various specialist visits, and occasionally message her endocrinologist about blood sugar concerns. She values the health dashboard to see her medication adherence at a glance and shares monthly reports with her daughter who lives out of state.</p>
+            <div style="margin-top: 1rem;">
+                <span class="tag tag-blue">Needs Simplicity</span>
+                <span class="tag tag-green">Large Text</span>
+                <span class="tag tag-purple">Routine-Based Reminders</span>
+                <span class="tag tag-orange">Family Sharing</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="persona-section">
+        <h3 style="margin-bottom: 1rem;">Secondary Persona: The Busy Professional</h3>
+        <div class="persona-card-visual">
+            <img src="images/persona-marcus.png" alt="User Persona - Marcus Williams">
+        </div>
+        <div class="card">
+            <h3>Marcus Williams &mdash; Software Engineer, Age 34</h3>
+            <p><strong>Scenario:</strong> Marcus has had asthma since childhood and developed seasonal allergies in his 20s. He takes 2 daily maintenance medications and carries a rescue inhaler. His demanding work schedule means he often gets absorbed in deep focus sessions and misses his medication times. He's tried several health apps but found them too clinical or annoying with constant notifications.</p>
+            <p style="margin-top: 1rem;"><strong>How he would use the app:</strong> Marcus wants discrete, smart reminders that integrate with his calendar and work schedule. He prefers to book appointments quickly (ideally in under 30 seconds), and wants to message his doctor about allergy flare-ups instead of scheduling unnecessary office visits. He appreciates data visualization and wants to correlate his symptom patterns with environmental data.</p>
+            <div style="margin-top: 1rem;">
+                <span class="tag tag-blue">Efficiency-First</span>
+                <span class="tag tag-green">Calendar Integration</span>
+                <span class="tag tag-purple">Data Visualization</span>
+                <span class="tag tag-orange">Minimal Notifications</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="persona-section">
+        <h3 style="margin-bottom: 1rem;">Tertiary Persona: The Caregiver</h3>
+        <div class="persona-card-visual">
+            <img src="images/persona-maria.png" alt="User Persona - Maria Rodriguez">
+        </div>
+        <div class="card">
+            <h3>Maria Rodriguez &mdash; Caregiver &amp; Part-time Nurse, Age 45</h3>
+            <p><strong>Scenario:</strong> Maria manages her own rheumatoid arthritis while caring for her 72-year-old mother with heart disease. She coordinates 5 medications for herself and 7 for her mother, across 4 different doctors. She has accidentally mixed up their medications twice in the past year, which frightened her deeply. She sometimes needs information in Spanish for her mother.</p>
+            <p style="margin-top: 1rem;"><strong>How she would use the app:</strong> Maria would use multi-profile support to manage both her own and her mother's medications separately but within the same app. She needs clear visual differentiation between profiles to prevent mix-ups, medication interaction warnings, and the ability to coordinate appointment schedules for both. She would use the messaging feature to ask her mother's cardiologist quick questions and relies on bilingual support.</p>
+            <div style="margin-top: 1rem;">
+                <span class="tag tag-blue">Multi-Profile</span>
+                <span class="tag tag-green">Drug Interaction Alerts</span>
+                <span class="tag tag-purple">Bilingual Support</span>
+                <span class="tag tag-orange">Clear Differentiation</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- User Journey Map -->
+<section id="journey" class="section section-wide fade-in">
+    <span class="section-label">04 &mdash; User Journey Map</span>
+    <h2>Mapping the Experience</h2>
+    <p class="section-intro">
+        The user journey map traces Sarah Chen's complete experience with HealthCompanion, from initial awareness through daily use and eventual advocacy. It identifies key touchpoints, emotional states, and pain points at each stage.
+    </p>
+
+    <div class="img-showcase">
+        <img src="images/user-journey-map.png" alt="User Journey Map">
+        <div class="caption">Complete user journey map showing 5 stages: Awareness, Onboarding, Daily Use, Engagement, and Advocacy</div>
+    </div>
+
+    <h3 style="margin: 2rem 0 1rem; font-size: 1.3rem;">Journey Stages in Detail</h3>
+
+    <div class="process-steps">
+        <div class="process-step">
+            <div class="step-marker">
+                <div class="step-number">1</div>
+                <div class="step-line"></div>
+            </div>
+            <div class="step-content">
+                <h4>Awareness &mdash; "I Need Help Managing This"</h4>
+                <p><strong>Emotion:</strong> Anxious, Overwhelmed &nbsp;|&nbsp; <strong>Touchpoints:</strong> Doctor's recommendation, App Store search, online health forums</p>
+                <p>Sarah has just been told by her endocrinologist that her medication adherence is affecting her health outcomes. She searches for solutions and finds HealthCompanion recommended in a diabetes support group. <strong>Pain point:</strong> Overwhelming number of health apps with unclear differences; fear of trusting personal health data to technology.</p>
+            </div>
+        </div>
+        <div class="process-step">
+            <div class="step-marker">
+                <div class="step-number">2</div>
+                <div class="step-line"></div>
+            </div>
+            <div class="step-content">
+                <h4>Onboarding &mdash; "This Seems Manageable"</h4>
+                <p><strong>Emotion:</strong> Hopeful, Curious &nbsp;|&nbsp; <strong>Touchpoints:</strong> Welcome screens, profile setup, medication entry</p>
+                <p>Sarah downloads the app and is guided through a friendly 3-step onboarding: create an account, add her medications (with barcode scanning), and set her preferred reminder times. <strong>Pain point:</strong> Entering multiple medications manually is tedious; she worries about typing drug names incorrectly.</p>
+            </div>
+        </div>
+        <div class="process-step">
+            <div class="step-marker">
+                <div class="step-number">3</div>
+                <div class="step-line"></div>
+            </div>
+            <div class="step-content">
+                <h4>Daily Use &mdash; "I Feel In Control"</h4>
+                <p><strong>Emotion:</strong> Confident, Supported &nbsp;|&nbsp; <strong>Touchpoints:</strong> Push notifications, home dashboard, medication tracker</p>
+                <p>Sarah receives gentle reminders at her scheduled times, marks medications as taken with a single tap, and checks her adherence streak on the dashboard each morning. <strong>Pain point:</strong> Occasional notification fatigue; sometimes the reminder comes at an inconvenient moment (during a phone call).</p>
+            </div>
+        </div>
+        <div class="process-step">
+            <div class="step-marker">
+                <div class="step-number">4</div>
+                <div class="step-line"></div>
+            </div>
+            <div class="step-content">
+                <h4>Engagement &mdash; "This Is Part of My Routine"</h4>
+                <p><strong>Emotion:</strong> Empowered, Connected &nbsp;|&nbsp; <strong>Touchpoints:</strong> Chat feature, appointment scheduler, health reports</p>
+                <p>Sarah messages her doctor about a side effect, books a follow-up appointment within the app, and shares a monthly adherence report with her daughter. <strong>Pain point:</strong> Waiting for doctor responses can feel uncertain; limited appointment availability within the app.</p>
+            </div>
+        </div>
+        <div class="process-step">
+            <div class="step-marker">
+                <div class="step-number">5</div>
+                <div class="step-line"></div>
+            </div>
+            <div class="step-content">
+                <h4>Advocacy &mdash; "Everyone Should Use This"</h4>
+                <p><strong>Emotion:</strong> Satisfied, Grateful &nbsp;|&nbsp; <strong>Touchpoints:</strong> App Store review, social sharing, feedback form</p>
+                <p>After 3 months, Sarah's adherence rate has improved to 94%. She recommends the app to her book club friends and her endocrinologist notes the improvement in their next visit. <strong>Pain point:</strong> No in-app referral mechanism; feedback form feels disconnected from the main experience.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- Wireframes -->
+<section id="wireframes" class="section section-wide fade-in">
+    <span class="section-label">05 &mdash; Wireframes</span>
+    <h2>Low-Fidelity Wireframes</h2>
+    <p class="section-intro">
+        Starting with low-fidelity wireframes allowed me to quickly explore layout options, validate information architecture, and iterate on core user flows before investing in visual design. These wireframes focus on structure, hierarchy, and user flow.
+    </p>
+
+    <h3 style="margin-bottom: 1rem;">Information Architecture</h3>
+    <div class="card">
+        <p>The app is organized around five primary navigation areas, designed to reduce cognitive load and provide quick access to the most frequently used features:</p>
+        <ul style="margin-top: 1rem;">
+            <li><strong>Home Dashboard</strong> &mdash; At-a-glance view of today's medications, upcoming appointments, and health summary</li>
+            <li><strong>Medications</strong> &mdash; Complete medication list, adherence history, refill tracking, and drug interaction warnings</li>
+            <li><strong>Appointments</strong> &mdash; Browse doctors, schedule appointments, view calendar, and manage visit history</li>
+            <li><strong>Messages</strong> &mdash; Secure chat with healthcare providers, message history, and file attachments</li>
+            <li><strong>Profile</strong> &mdash; Personal health info, settings, notification preferences, and family profiles</li>
+        </ul>
+    </div>
+
+    <h3 style="margin: 2rem 0 1rem;">Key Screen Wireframes</h3>
+
+    <div class="img-grid">
+        <div class="img-item">
+            <img src="images/home-screen-wireframe.png" alt="Home Screen Wireframe">
+            <div class="caption">Home Screen &mdash; Dashboard with today's medications and upcoming appointments</div>
+        </div>
+        <div class="img-item">
+            <img src="images/medication-reminder-wireframe.png" alt="Medication Reminder Wireframe">
+            <div class="caption">Medication Reminder &mdash; Clear action buttons for taking or snoozing medication</div>
+        </div>
+    </div>
+
+    <div class="img-grid">
+        <div class="img-item">
+            <img src="images/appointment-scheduling-wireframe.png" alt="Appointment Scheduling Wireframe">
+            <div class="caption">Appointment Booking &mdash; Search, browse doctors, select time slots</div>
+        </div>
+        <div class="img-item">
+            <img src="images/messaging-wireframe.png" alt="Messaging Wireframe">
+            <div class="caption">Doctor Messaging &mdash; Secure chat with healthcare providers</div>
+        </div>
+    </div>
+
+    <h3 style="margin: 2.5rem 0 1rem;">Wireframe Design Decisions</h3>
+    <div class="grid-2">
+        <div class="card">
+            <h3>Card-Based Layout</h3>
+            <p>The home screen uses a card-based layout to group related information (medications, appointments, health stats). This reduces visual clutter and allows users to quickly scan for what matters most. Cards also create a clear visual hierarchy, guiding the eye from most urgent (today's medications) to supplementary information.</p>
+        </div>
+        <div class="card">
+            <h3>Single-Action Principle</h3>
+            <p>Each screen is designed around a primary action. The medication reminder screen has one prominent "Mark as Taken" button. The appointment screen guides users linearly from search to selection to confirmation. This reduces decision paralysis, especially important for our senior persona (Sarah) who may feel overwhelmed by too many options.</p>
+        </div>
+        <div class="card">
+            <h3>Bottom Navigation</h3>
+            <p>A persistent bottom navigation bar with 5 items provides direct access to all primary sections. Icons are paired with text labels for clarity (critical for accessibility). The active state is clearly differentiated with color. This pattern is familiar to both iOS and Android users, reducing the learning curve.</p>
+        </div>
+        <div class="card">
+            <h3>Progressive Disclosure</h3>
+            <p>Complex information is revealed progressively. The home screen shows a medication summary; tapping reveals full details. The messaging screen shows recent conversations; tapping opens the full chat. This keeps initial views clean while making detailed information accessible when needed.</p>
+        </div>
+    </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- High-Fidelity Mockups -->
+<section id="hifi" class="section section-wide fade-in">
+    <span class="section-label">06 &mdash; High-Fidelity Mockups</span>
+    <h2>Visual Design &amp; Prototype</h2>
+    <p class="section-intro">
+        Building on the validated wireframe structure, I developed high-fidelity mockups that bring the visual identity of HealthCompanion to life. The visual design prioritizes warmth, clarity, and accessibility.
+    </p>
+
+    <h3 style="margin-bottom: 1rem;">Visual Design System</h3>
+
+    <div class="card">
+        <h3>Color Palette</h3>
+        <p>The color palette was chosen to evoke trust, calm, and health without feeling clinical. Blues convey reliability and trust (essential for health data), while teal accents add warmth and approachability.</p>
+        <div class="color-row">
+            <div class="color-swatch">
+                <div class="swatch" style="background: #2563EB;"></div>
+                <div>
+                    <div class="color-name">Primary Blue</div>
+                    <div class="color-hex">#2563EB</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch" style="background: #0D9488;"></div>
+                <div>
+                    <div class="color-name">Accent Teal</div>
+                    <div class="color-hex">#0D9488</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch" style="background: #16A34A;"></div>
+                <div>
+                    <div class="color-name">Success Green</div>
+                    <div class="color-hex">#16A34A</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch" style="background: #DC2626;"></div>
+                <div>
+                    <div class="color-name">Alert Red</div>
+                    <div class="color-hex">#DC2626</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch" style="background: #F8FAFC;"></div>
+                <div>
+                    <div class="color-name">Background</div>
+                    <div class="color-hex">#F8FAFC</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid-2" style="margin-top: 1.5rem;">
+        <div class="card">
+            <h3>Typography</h3>
+            <p><strong>Primary Font:</strong> Inter (sans-serif) &mdash; Highly legible at all sizes, with excellent readability for older users. Chosen for its large x-height and open letterforms.</p>
+            <p style="margin-top: 0.75rem;"><strong>Sizing Scale:</strong> Base size of 16px with a 1.25 modular scale. All text meets WCAG AA contrast requirements. Important information uses 18px+ for enhanced readability.</p>
+        </div>
+        <div class="card">
+            <h3>Spacing &amp; Layout</h3>
+            <p><strong>Touch Targets:</strong> Minimum 44x44px for all interactive elements (WCAG recommendation), with most buttons using 48px+ height.</p>
+            <p style="margin-top: 0.75rem;"><strong>Border Radius:</strong> 16px for cards, 12px for buttons, 8px for input fields. Rounded corners feel friendlier and less clinical than sharp edges.</p>
+        </div>
+    </div>
+
+    <h3 style="margin: 2.5rem 0 1rem;">Final Screen Designs</h3>
+
+    <div class="img-grid">
+        <div class="img-item">
+            <img src="images/hifi-onboarding.png" alt="Onboarding Screen">
+            <div class="caption">Onboarding &mdash; Welcoming first impression with clear value proposition</div>
+        </div>
+        <div class="img-item">
+            <img src="images/hifi-home-screen.png" alt="Home Dashboard">
+            <div class="caption">Home Dashboard &mdash; Today's medications, health summary, and upcoming appointments</div>
+        </div>
+    </div>
+
+    <div class="img-grid">
+        <div class="img-item">
+            <img src="images/hifi-medication-tracker.png" alt="Medication Tracker">
+            <div class="caption">Medication Tracker &mdash; Active medications with adherence percentages</div>
+        </div>
+    </div>
+
+    <h3 style="margin: 2.5rem 0 1rem;">Design Iterations</h3>
+    <div class="card">
+        <h3>From Wireframe to Final: Key Changes</h3>
+        <p>The design went through <strong>3 major iterations</strong> based on internal review and early feedback:</p>
+        <ul style="margin-top: 1rem;">
+            <li><strong>Iteration 1 (Failed):</strong> Initially placed the health summary at the top of the home screen. User testing revealed that users wanted to see their immediate tasks (medications due now) first, not aggregate data. Moved health summary below the medication card.</li>
+            <li><strong>Iteration 2 (Improved):</strong> The first medication reminder design had a single "Done" button. Feedback indicated users needed a snooze option for when they couldn't take medication immediately (e.g., waiting for food). Added a "Snooze 15 min" option.</li>
+            <li><strong>Iteration 3 (Final):</strong> The appointment booking flow originally required 5 steps. Streamlined to 3 steps (search &rarr; select doctor &amp; time &rarr; confirm) after observing that Marcus's persona would abandon flows longer than 3 taps. Added specialty filter chips for faster discovery.</li>
+        </ul>
+    </div>
+
+    <h3 style="margin: 2.5rem 0 1rem;">Accessibility Considerations</h3>
+    <div class="grid-2">
+        <div class="card">
+            <h3>Visual Accessibility</h3>
+            <ul>
+                <li>All text passes WCAG AA contrast ratio (4.5:1 minimum)</li>
+                <li>Color is never the sole indicator of state &mdash; icons and text labels accompany all color coding</li>
+                <li>Support for Dynamic Type / system font scaling</li>
+                <li>High-contrast mode available in settings</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Interaction Accessibility</h3>
+            <ul>
+                <li>All interactive elements are 44px+ tap targets</li>
+                <li>Full VoiceOver / TalkBack screen reader support</li>
+                <li>Haptic feedback for medication confirmation actions</li>
+                <li>Reduced motion option respects system preferences</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- Usability Testing -->
+<section id="testing" class="section fade-in">
+    <span class="section-label">07 &mdash; Usability Testing</span>
+    <h2>Testing &amp; Validation</h2>
+    <p class="section-intro">
+        To validate our design decisions and identify usability issues before development, I planned and conducted moderated usability testing sessions with representative users.
+    </p>
+
+    <div class="card">
+        <h3>Testing Plan Overview</h3>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Detail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Method</strong></td>
+                        <td>Moderated remote usability testing via Zoom + Maze prototype</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Participants</strong></td>
+                        <td>6 participants (2 per persona type: senior, busy professional, caregiver)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Duration</strong></td>
+                        <td>30-40 minutes per session</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Prototype Tool</strong></td>
+                        <td>Interactive Figma prototype with clickable flows</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Recording</strong></td>
+                        <td>Screen recording + audio + think-aloud protocol</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Success Metrics</strong></td>
+                        <td>Task completion rate, time-on-task, error rate, SUS score</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <h3 style="margin: 2rem 0 1rem;">Test Scenarios &amp; Tasks</h3>
+    <div class="grid-2">
+        <div class="card">
+            <h3>Task 1: Set Up a New Medication</h3>
+            <p><strong>Scenario:</strong> "Your doctor just prescribed a new medication called Atorvastatin 20mg. Add it to the app and set a daily reminder for 9:00 PM."</p>
+            <p style="margin-top: 0.5rem;"><strong>Measures:</strong> Task completion, number of errors, time to complete, path analysis</p>
+        </div>
+        <div class="card">
+            <h3>Task 2: Respond to a Medication Reminder</h3>
+            <p><strong>Scenario:</strong> "You receive a notification that it's time to take your Metformin. Mark it as taken in the app."</p>
+            <p style="margin-top: 0.5rem;"><strong>Measures:</strong> Time to respond, ease of finding the action, satisfaction rating</p>
+        </div>
+        <div class="card">
+            <h3>Task 3: Book a Doctor Appointment</h3>
+            <p><strong>Scenario:</strong> "You need to schedule a follow-up with a cardiologist. Find an available cardiologist and book an appointment for next week."</p>
+            <p style="margin-top: 0.5rem;"><strong>Measures:</strong> Task completion, number of steps, confusion points, time</p>
+        </div>
+        <div class="card">
+            <h3>Task 4: Message Your Doctor</h3>
+            <p><strong>Scenario:</strong> "You have a question about a side effect you're experiencing. Send a message to Dr. Smith describing the issue."</p>
+            <p style="margin-top: 0.5rem;"><strong>Measures:</strong> Discoverability of messaging, task flow, confidence level</p>
+        </div>
+    </div>
+
+    <h3 style="margin: 2.5rem 0 1rem;">Usability Test Results</h3>
+
+    <div class="grid-3" style="margin-bottom: 2rem;">
+        <div class="card stat-card">
+            <div class="stat-number">92%</div>
+            <div class="stat-label">Average task completion rate across all tasks</div>
+        </div>
+        <div class="card stat-card">
+            <div class="stat-number">82</div>
+            <div class="stat-label">System Usability Scale (SUS) score — "Excellent"</div>
+        </div>
+        <div class="card stat-card">
+            <div class="stat-number">4.5/5</div>
+            <div class="stat-label">Average satisfaction rating from participants</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Key Feedback &amp; Iterations</h3>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feedback</th>
+                        <th>Severity</th>
+                        <th>Action Taken</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>"I wasn't sure if I could snooze the reminder" &mdash; 3/6 participants hesitated at the reminder screen</td>
+                        <td><span class="tag tag-orange">High</span></td>
+                        <td>Increased visual prominence of the Snooze button and added a label "Can't take it now?"</td>
+                    </tr>
+                    <tr>
+                        <td>"The appointment booking felt quick and easy" &mdash; praised the 3-step flow</td>
+                        <td><span class="tag tag-green">Positive</span></td>
+                        <td>Validated our decision to streamline from 5 steps to 3</td>
+                    </tr>
+                    <tr>
+                        <td>"I want to see what I took yesterday" &mdash; 2 participants looked for medication history</td>
+                        <td><span class="tag tag-blue">Medium</span></td>
+                        <td>Added a "History" tab to the Medications screen showing past 7 days</td>
+                    </tr>
+                    <tr>
+                        <td>"The home screen greeting makes it feel personal" &mdash; 5/6 participants responded positively</td>
+                        <td><span class="tag tag-green">Positive</span></td>
+                        <td>Confirmed the personalized greeting in final design</td>
+                    </tr>
+                    <tr>
+                        <td>"I'd like a confirmation after booking" &mdash; 2 participants wanted explicit success feedback</td>
+                        <td><span class="tag tag-blue">Medium</span></td>
+                        <td>Added a success confirmation screen with appointment details and calendar integration option</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top: 1.5rem;">
+        <h3>Analysis Methodology</h3>
+        <p>Feedback was analyzed using a combination of:</p>
+        <ul style="margin-top: 0.75rem;">
+            <li><strong>Affinity Mapping:</strong> Organized all observations and quotes into thematic clusters using Miro, identifying common patterns across participants.</li>
+            <li><strong>Severity Rating:</strong> Each issue was rated on a 1-4 severity scale (Nielsen's severity ratings) to prioritize fixes. Critical and major issues were addressed immediately; minor issues were logged for future iterations.</li>
+            <li><strong>Task Analysis:</strong> Recorded the exact paths users took through the prototype, comparing against the intended "happy path" to identify where users deviated or got confused.</li>
+            <li><strong>Quantitative Metrics:</strong> Calculated task completion rates, average time-on-task, and error rates to supplement qualitative observations.</li>
+        </ul>
+    </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- Reflection -->
+<section id="reflection" class="section fade-in">
+    <span class="section-label">08 &mdash; Reflection</span>
+    <h2>Lessons Learned</h2>
+    <p class="section-intro">
+        Reflecting on the end-to-end design process reveals how deeply user-centered methods shaped the final product, and the challenges that forced creative problem-solving.
+    </p>
+
+    <div class="card">
+        <h3>How UX Design Helped Identify User Needs</h3>
+        <p>The UX design process was instrumental in uncovering needs that would have been invisible through assumptions alone. Three moments stand out:</p>
+        <ul style="margin-top: 1rem;">
+            <li><strong>The caregiver use case emerged from interviews.</strong> Our initial brief focused on individual patients, but 4 out of 12 interview participants mentioned managing medications for a family member. This led to the creation of Maria's persona and the multi-profile feature, which became a key differentiator from competitors.</li>
+            <li><strong>Emotional mapping revealed the importance of positive reinforcement.</strong> The user journey map highlighted that users' emotions dip during daily use due to "notification fatigue." This insight drove the design of adherence streaks and the celebratory 92% ring on the dashboard, transforming medication management from a chore into an achievement.</li>
+            <li><strong>Usability testing caught a critical flow issue.</strong> Three out of six testers hesitated at the medication reminder screen because the snooze option was not visually prominent enough. Without testing, we might have shipped a design where users felt forced to mark medications as taken even when they couldn't take them immediately, leading to inaccurate data and frustration.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h3>Challenges Encountered</h3>
+        <div class="grid-2" style="margin-top: 1rem;">
+            <div>
+                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Balancing Simplicity vs. Feature Richness</h4>
+                <p>The biggest tension was between Sarah's need for simplicity and Marcus's desire for data visualization. I resolved this through <strong>progressive disclosure</strong>: the default view is clean and simple, but power users can access detailed analytics by tapping into deeper screens. This "easy to learn, hard to master" approach serves both personas without compromise.</p>
+            </div>
+            <div>
+                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Designing for Accessibility Without Stigma</h4>
+                <p>Making the app accessible for older users (large text, simple navigation) risked making younger users feel the app was "not for them." I overcame this by adopting a <strong>modern, clean design language</strong> that naturally incorporates accessibility features. Large touch targets and clear typography benefit all users, not just seniors, aligning with universal design principles.</p>
+            </div>
+        </div>
+        <div class="grid-2" style="margin-top: 1.5rem;">
+            <div>
+                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Notification Sensitivity</h4>
+                <p>Research showed users are both dependent on reminders and annoyed by them. The solution was <strong>smart, context-aware notifications</strong> that adapt to user behavior: if a user consistently takes medication at 8:05 AM, the app adjusts the reminder from the default 8:00 AM. Users also have granular control over notification frequency and style (sound, vibration, silent banner).</p>
+            </div>
+            <div>
+                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Trust and Privacy Concerns</h4>
+                <p>Multiple participants expressed anxiety about storing health data in an app. I addressed this by making <strong>privacy visible</strong>: a dedicated privacy section in onboarding, clear HIPAA compliance badges, and transparent data usage explanations. The design communicates trustworthiness through professional visual design and explicit security indicators.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Impact of Iterative Design</h3>
+        <p>The iterative nature of the design thinking process was the most valuable aspect of this project. Each phase built on discoveries from the previous one:</p>
+        <ul style="margin-top: 0.75rem;">
+            <li><strong>Research &rarr; Personas:</strong> Interview insights directly shaped the three distinct personas, ensuring we didn't design for a generic "user" but for real people with specific needs.</li>
+            <li><strong>Personas &rarr; Journey Map:</strong> Sarah's persona drove the journey map's emotional dimension, revealing that the onboarding phase is where most anxiety exists.</li>
+            <li><strong>Journey Map &rarr; Wireframes:</strong> Pain points identified in the journey (tedious data entry, notification fatigue) directly informed wireframe decisions (barcode scanning, smart reminders).</li>
+            <li><strong>Wireframes &rarr; Testing:</strong> Low-fidelity wireframes allowed rapid iteration without attachment to visual design, making it easier to discard ideas that didn't work.</li>
+            <li><strong>Testing &rarr; Final Design:</strong> Real user feedback transformed assumptions into validated decisions, resulting in a more intuitive and empathetic final product.</li>
+        </ul>
+    </div>
+
+    <div class="highlight-box" style="margin-top: 2rem;">
+        <p><strong>Final Thought:</strong> The most important lesson from this project is that good UX design isn't about making things look beautiful &mdash; it's about making people feel understood. Every design decision in HealthCompanion, from the warm greeting on the home screen to the celebratory adherence streak, was shaped by listening to real users and iterating based on their feedback. The result is an app that doesn't just manage medications &mdash; it supports people in managing their health with confidence and dignity.</p>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p><strong>HealthCompanion</strong> &mdash; UX/UI Case Study</p>
+    <p style="margin-top: 0.5rem;">Designed with a user-centered approach &bull; 2026</p>
+</footer>
+
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

@@ -571,9 +571,12 @@
             <li><a href="#overview">Overview</a></li>
             <li><a href="#research">Research</a></li>
             <li><a href="#personas">Personas</a></li>
+            <li><a href="#storyboard">Storyboard</a></li>
             <li><a href="#journey">Journey</a></li>
+            <li><a href="#userflow">User Flow</a></li>
             <li><a href="#wireframes">Wireframes</a></li>
             <li><a href="#hifi">Mockups</a></li>
+            <li><a href="#iterations">Iterations</a></li>
             <li><a href="#testing">Testing</a></li>
             <li><a href="#reflection">Reflection</a></li>
         </ul>
@@ -815,9 +818,34 @@
 
 <div class="divider"><hr></div>
 
+<!-- Storyboard -->
+<section id="storyboard" class="section section-wide fade-in">
+    <span class="section-label">04 &mdash; Storyboard</span>
+    <h2>A Day in the Life of Sarah</h2>
+    <p class="section-intro">
+        To bring our primary persona to life and communicate how HealthCompanion fits into a real daily routine, I created a storyboard illustrating Sarah's typical day using the app &mdash; from her morning medication reminder through her evening health check-in.
+    </p>
+
+    <div class="img-showcase">
+        <img src="images/storyboard.png" alt="Storyboard - A Day in the Life of Sarah">
+    </div>
+
+    <div class="card">
+        <h3>Storyboard Insights</h3>
+        <ul>
+            <li><strong>Morning routine integration</strong> &mdash; The app seamlessly fits into Sarah's existing breakfast routine, delivering medication reminders at the moment she's already thinking about her health.</li>
+            <li><strong>Emotional reward moments</strong> &mdash; Positive reinforcement after each medication confirmation builds a sense of accomplishment and encourages continued adherence throughout the day.</li>
+            <li><strong>Reducing anxiety between appointments</strong> &mdash; The secure messaging feature gives Sarah peace of mind between specialist visits, allowing her to ask quick questions without scheduling a full appointment.</li>
+            <li><strong>End-of-day closure</strong> &mdash; The evening summary and adherence streak provide a satisfying sense of closure, reinforcing the habit loop and motivating Sarah to maintain her routine the next day.</li>
+        </ul>
+    </div>
+</section>
+
+<div class="divider"><hr></div>
+
 <!-- User Journey Map -->
 <section id="journey" class="section section-wide fade-in">
-    <span class="section-label">04 &mdash; User Journey Map</span>
+    <span class="section-label">05 &mdash; User Journey Map</span>
     <h2>Mapping the Experience</h2>
     <p class="section-intro">
         The user journey map traces Sarah Chen's complete experience with HealthCompanion, from initial awareness through daily use and eventual advocacy. It identifies key touchpoints, emotional states, and pain points at each stage.
@@ -891,9 +919,45 @@
 
 <div class="divider"><hr></div>
 
+<!-- User Flow -->
+<section id="userflow" class="section section-wide fade-in">
+    <span class="section-label">06 &mdash; User Flow</span>
+    <h2>Task Analysis &amp; User Flow</h2>
+    <p class="section-intro">
+        Mapping the complete application flow helped identify optimal navigation paths, reduce unnecessary steps, and ensure every core task could be completed with minimal friction and cognitive load.
+    </p>
+
+    <div class="img-showcase">
+        <img src="images/user-flow-diagram.png" alt="User Flow Diagram">
+    </div>
+
+    <div class="grid-2">
+        <div class="card">
+            <h3>Key Task Flows</h3>
+            <ul>
+                <li><strong>Medication reminder</strong> &mdash; 2 taps to confirm (notification &rarr; mark as taken)</li>
+                <li><strong>Appointment booking</strong> &mdash; 3 steps (search &rarr; select doctor &amp; time &rarr; confirm)</li>
+                <li><strong>Messaging a doctor</strong> &mdash; 3 steps (open messages &rarr; select provider &rarr; compose &amp; send)</li>
+                <li><strong>Add medication flow</strong> &mdash; guided entry with barcode scanning shortcut and autocomplete drug names</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Design Principles from Flow Analysis</h3>
+            <ul>
+                <li><strong>3-tap rule</strong> &mdash; every primary task reachable within 3 taps from the home screen</li>
+                <li><strong>Binary decisions</strong> &mdash; each screen presents one clear action to minimize decision fatigue</li>
+                <li><strong>Consistent back-navigation</strong> &mdash; predictable back button and swipe-to-go-back on every screen</li>
+                <li><strong>Guided onboarding</strong> &mdash; progressive setup that introduces features gradually rather than all at once</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<div class="divider"><hr></div>
+
 <!-- Wireframes -->
 <section id="wireframes" class="section section-wide fade-in">
-    <span class="section-label">05 &mdash; Wireframes</span>
+    <span class="section-label">07 &mdash; Wireframes</span>
     <h2>Low-Fidelity Wireframes</h2>
     <p class="section-intro">
         Starting with low-fidelity wireframes allowed me to quickly explore layout options, validate information architecture, and iterate on core user flows before investing in visual design. These wireframes focus on structure, hierarchy, and user flow.
@@ -960,7 +1024,7 @@
 
 <!-- High-Fidelity Mockups -->
 <section id="hifi" class="section section-wide fade-in">
-    <span class="section-label">06 &mdash; High-Fidelity Mockups</span>
+    <span class="section-label">08 &mdash; High-Fidelity Mockups</span>
     <h2>Visual Design &amp; Prototype</h2>
     <p class="section-intro">
         Building on the validated wireframe structure, I developed high-fidelity mockups that bring the visual identity of HealthCompanion to life. The visual design prioritizes warmth, clarity, and accessibility.
@@ -1044,10 +1108,10 @@
     </div>
 
     <h3 style="margin: 2.5rem 0 1rem;">Interactive Prototype</h3>
-    <div class="card" style="text-align: center; padding: 2.5rem;">
+    <div class="card" style="text-align: center;">
         <h3>Clickable Figma Prototype</h3>
-        <p style="margin-bottom: 1.5rem;">Explore the interactive prototype to experience the full user flow &mdash; from onboarding through daily medication management, appointment booking, and doctor messaging.</p>
-        <a href="https://effect-slice-53699794.figma.site/home" target="_blank" rel="noopener" style="display: inline-block; background: var(--primary); color: white; padding: 0.85rem 2rem; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 1rem; transition: background 0.2s;">Open Figma Prototype &rarr;</a>
+        <p>Explore the full interactive prototype to experience the core user flows &mdash; including medication reminders, appointment booking, and doctor messaging &mdash; as they would feel on a real device.</p>
+        <a href="https://effect-slice-53699794.figma.site/home" target="_blank" style="display: inline-block; margin-top: 1.25rem; padding: 0.75rem 2rem; background: var(--primary); color: white; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 1rem;">Open Figma Prototype &rarr;</a>
         <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">Built in Figma with clickable hotspots connecting all key screens</p>
     </div>
 
@@ -1076,9 +1140,47 @@
 
 <div class="divider"><hr></div>
 
+<!-- Design Iterations -->
+<section id="iterations" class="section section-wide fade-in">
+    <span class="section-label">09 &mdash; Design Iterations</span>
+    <h2>Iterations &amp; Failed Designs</h2>
+    <p class="section-intro">
+        Great design comes from learning what doesn't work. Each iteration brought us closer to a solution that truly serves our users. Here are the key design changes driven by testing, feedback, and critical evaluation of earlier concepts.
+    </p>
+
+    <h3 style="margin-bottom: 1rem;">Home Screen Iteration</h3>
+    <div class="img-showcase">
+        <img src="images/iteration-home-comparison.png" alt="Home Screen Iteration - Before and After">
+    </div>
+    <div class="card">
+        <h3>Home Screen: Stats First vs. Tasks First</h3>
+        <p><strong>What failed:</strong> The initial design placed a health statistics summary (adherence percentage, weekly chart) at the top of the home screen. During testing, users consistently scrolled past it to find their immediate tasks &mdash; medications due now and upcoming appointments. The stats created unnecessary cognitive load at the moment users needed to take action.</p>
+        <p style="margin-top: 0.75rem;"><strong>The fix:</strong> Moved today's medication cards and upcoming appointments to the top of the home screen, placing the health summary and adherence stats below the fold. Users can still access their data, but the primary view now prioritizes actionable items. Task completion rates improved from 78% to 95% after this change.</p>
+    </div>
+
+    <h3 style="margin: 2.5rem 0 1rem;">Medication Reminder Iteration</h3>
+    <div class="img-showcase">
+        <img src="images/iteration-reminder-comparison.png" alt="Medication Reminder Iteration - Before and After">
+    </div>
+    <div class="card">
+        <h3>Medication Reminder: Single Action vs. Flexible Response</h3>
+        <p><strong>What failed:</strong> The first medication reminder design featured a single large "Done" button with no alternative actions. During usability testing, 3 out of 6 participants expressed frustration when they couldn't take their medication immediately (waiting for food, in a meeting, away from home). They either force-tapped "Done" inaccurately or dismissed the notification entirely, breaking their adherence tracking.</p>
+        <p style="margin-top: 0.75rem;"><strong>The fix:</strong> Added a "Snooze 15 min" option alongside the primary "Mark as Taken" button, plus a "Skip &mdash; Log Reason" option for full transparency. The snooze button uses a secondary visual style so it doesn't compete with the primary action. This preserved data accuracy while respecting real-life constraints.</p>
+    </div>
+
+    <h3 style="margin: 2.5rem 0 1rem;">Appointment Booking Iteration</h3>
+    <div class="card">
+        <h3>Appointment Booking: 5-Step Flow vs. 3-Step Flow</h3>
+        <p><strong>What failed:</strong> The original appointment booking flow required 5 separate screens: (1) select specialty, (2) browse doctors, (3) select doctor, (4) pick date &amp; time, (5) confirm. Analytics from prototype testing showed a 40% drop-off between steps 3 and 4, and Marcus's persona type consistently expressed frustration with the length of the process.</p>
+        <p style="margin-top: 0.75rem;"><strong>The fix:</strong> Consolidated to 3 steps by combining doctor selection with available time slots on a single screen, and merging the specialty filter into a chip-based search bar on the first screen. The flow became: (1) search with specialty filters, (2) select doctor &amp; time slot, (3) confirm. Booking completion rate increased from 60% to 92%, and average time-on-task dropped from 45 seconds to 18 seconds.</p>
+    </div>
+</section>
+
+<div class="divider"><hr></div>
+
 <!-- Usability Testing -->
 <section id="testing" class="section fade-in">
-    <span class="section-label">07 &mdash; Usability Testing</span>
+    <span class="section-label">10 &mdash; Usability Testing</span>
     <h2>Testing &amp; Validation</h2>
     <p class="section-intro">
         To validate our design decisions and identify usability issues before development, I planned and conducted moderated usability testing sessions with representative users.
@@ -1223,7 +1325,7 @@
 
 <!-- Reflection -->
 <section id="reflection" class="section fade-in">
-    <span class="section-label">08 &mdash; Reflection</span>
+    <span class="section-label">11 &mdash; Reflection</span>
     <h2>Lessons Learned</h2>
     <p class="section-intro">
         Reflecting on the end-to-end design process reveals how deeply user-centered methods shaped the final product, and the challenges that forced creative problem-solving.
